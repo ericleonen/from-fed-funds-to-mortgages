@@ -1,4 +1,4 @@
-# From Fed to Finish
+# From Fed Funds to Mortgages
 
 A simple web app that helps users understand how the Federal Funds Rate affects the economy.
 
