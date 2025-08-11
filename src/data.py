@@ -6,24 +6,30 @@ from fredapi import Fred
 import os
 from dotenv import load_dotenv
 import pandas as pd
+from enum import Enum
 
 load_dotenv()
 fred = Fred(api_key=os.getenv("FRED_API_KEY"))
 
-def get_data():
+class Frequency(Enum):
+    Monthly = "MS"
+    Yearly = "YS"
+
+def get_data(freq: Frequency) -> pd.DataFrame:
     """
-    Returns values of the average monthly rates of Federal Funds, 3-Month Treasuries,
+    Returns values of the average monthly or yearly rates of Federal Funds, 3-Month Treasuries,
     10-Year Treasuries, and 30-Year FRMs.
 
     Parameters
     ----------
-    None
+    freq: Frequency
+        The frequency of the returned data.
 
     Returns
     -------
     data: pd.DataFrame
-        Year-indexed DataFrame of the interest rates. Missing monthly values are interpolated.
-        The rate of each year is the average of all monthly rates.
+        Time-indexed DataFrame of the interest rates. Missing monthly values are interpolated.
+        The rate of each period is the average of all monthly rates within that period.
     """
 
     names_and_codes = [
@@ -36,7 +42,7 @@ def get_data():
     data = {}
 
     for name, code in names_and_codes:
-        series = fred.get_series(code).interpolate("linear").resample("YS").mean()
+        series = fred.get_series(code).interpolate("linear").resample(freq.value).mean()
         series.index = series.index.year
 
         data[name] = series
@@ -50,8 +56,8 @@ def difference_data(data: pd.DataFrame):
     Parameters
     ----------
     data: pd.DataFrame
-        Year-indexed DataFrame of the interest rates. Missing monthly values are interpolated.
-        The rate of each year is the average of all monthly rates.
+        Time-indexed DataFrame of the interest rates. Missing monthly values are interpolated.
+        The rate of each period is the average of all monthly rates within that period.
 
     Returns
     -------
