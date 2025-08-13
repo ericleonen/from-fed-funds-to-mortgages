@@ -4,7 +4,6 @@ Helper methods for making and saving paper-ready plots.
 
 import pandas as pd
 import matplotlib.pyplot as plt
-import statsmodels.api as sm
 
 def set_theme():
     """
@@ -25,6 +24,48 @@ def set_theme():
         "axes.grid": True,
         "grid.alpha": 0.3
     })
+
+def plot_data_dict(data_dict: dict[str, pd.Series]):
+    """
+    Plots all series in data_dict.
+
+    Parameters
+    ----------
+    data_dict: dict[str, pd.Series]
+        Map between a series' name and its time-indexed values.
+
+    Returns
+    -------
+    None
+    """
+
+    for name, series in data_dict.items():
+        plt.plot(series, label=name)
+
+    plt.title(f"Interest Rates, {series.index[0].year}-{series.index[-1].year}")
+    plt.ylabel("Annualized Interest Rate (%)")
+    plt.legend()
+    plt.show()
+
+def plot_diffed_data(diffed_data: pd.DataFrame):
+    """
+    Plots all differenced data.
+
+    Parameters
+    ----------
+    diffed_data: pd.DataFrame
+        Year-indexed DataFrame of differenced interest rates.
+
+    Returns
+    -------
+    None
+    """
+    
+    diffed_data.plot(
+        title=f"YoY Changes in Yearly Interest Rates, {diffed_data.index[0]}-{diffed_data.index[-1]}",
+        ylabel="Change in Annualized Interest Rate (%)"
+    )
+    plt.show()
 
 def plot_lm(
     x: pd.Series,
@@ -78,8 +119,8 @@ def plot_lm(
         alpha=0.3,
         label=f"{round(confidence_level * 100)}% CI"
     )
-    plt.xlabel(f"{x.name}")
-    plt.ylabel(f"{x.name}")
+    plt.xlabel(f"{x.name} (%)")
+    plt.ylabel(f"{y.name} (%)")
     plt.title(title)
     plt.legend()
     plt.show()
