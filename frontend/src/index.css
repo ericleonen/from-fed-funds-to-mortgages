@@ -1,4 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+:root {
+  /* FONTS */
+  --font-primary: "DM Serif Display", serif;
+  --font-secondary: "Roboto Flex", sans-serif;
+  /* FONT SIZES */
+  --font-size-title: 64px;
+  --font-size-subtitle: 32px;
+  --font-size-header: 24px;
+  --font-size-default: 16px;
+  /* COLORS */
+  --color-background: #F3ECD0;
+  --color-white: #f7f7f7;
+  --color-gray: #808080;
+  --color-black: #0e0e0e;
+  --color-fed: #212049;
+  --color-treasury-light: #FFEA94;
+  --color-treasury: #E8CB56;
+  --color-treasury-dark: #C9A206;
+  --color-frm-light: #3DAE2E;
+  --color-frm: #094C00;
+}
+
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-default);
+  color: var(--black);
 }

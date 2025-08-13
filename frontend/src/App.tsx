@@ -6,8 +6,10 @@ import "./App.css";
 function App() {
   return (
     <div className="appContainer">
-      <Header />
-      <Cards />
+      <div className="mainContainer">
+        <Header />
+        <Cards />
+      </div>
       <Footer />
     </div>
   );
