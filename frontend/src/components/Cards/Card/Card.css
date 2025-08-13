@@ -1,7 +1,39 @@
 .cardContainer {
     height: 400px;
     width: 300px;
-    border: 1px solid black;
     margin-left: 16px;
     margin-right: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.cardTitle {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-header);
+    text-align: center;
+}
+
+#FedFunds {
+    background-color: var(--color-fed);
+
+    .cardTitle {
+        color: var(--color-white);
+    }
+}
+
+#ShortTerm {
+    background-color: var(--color-treasury);
+}
+
+#LongTerm {
+    background-color: var(--color-treasury-dark);
+}
+
+#FRM {
+    background-color: var(--color-frm);
+
+    .cardTitle {
+        color: var(--color-white);
+    }
 }

@@ -1,13 +1,15 @@
+import Rates from "../../../constants/Rates";
 import "./Card.css";
 
 type CardProps = {
-    title: string
+    title: string,
+    rate: Rates
 };
 
-const Card: React.FC<CardProps> = ({ title }) => {
+const Card: React.FC<CardProps> = ({ title, rate }) => {
     return (
-        <div className="cardContainer">
-            <p>{title}</p>
+        <div className="cardContainer" id={rate}>
+            <p className="cardTitle">{title}</p>
         </div>
     );
 };
