@@ -1,5 +1,5 @@
 import Rates from "../../constants/Rates";
-import Card from "./Card/Card";
+import Card from "./Card";
 import CardGroup from "./CardGroup";
 import "./Cards.css";
 
@@ -10,7 +10,9 @@ function Cards() {
                 <Card 
                     title="Federal Funds Rate"
                     rate={Rates.FedFunds}
-                />
+                >
+
+                </Card>
             </CardGroup>
             <CardGroup lower>
                 <Card 

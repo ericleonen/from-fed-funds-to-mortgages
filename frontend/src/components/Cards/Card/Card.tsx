@@ -3,13 +3,17 @@ import "./Card.css";
 
 type CardProps = {
     title: string,
-    rate: Rates
+    rate: Rates,
+    children?: React.ReactNode
 };
 
-const Card: React.FC<CardProps> = ({ title, rate }) => {
+const Card: React.FC<CardProps> = ({ title, rate, children }) => {
     return (
         <div className="cardContainer" id={rate}>
             <p className="cardTitle">{title}</p>
+            <div>
+                {children}
+            </div>
         </div>
     );
 };

@@ -6,6 +6,7 @@
   --font-secondary: "Roboto Flex", sans-serif;
   /* FONT SIZES */
   --font-size-title: 64px;
+  --font-size-metric: 48px;
   --font-size-subtitle: 32px;
   --font-size-header: 24px;
   --font-size-default: 16px;
@@ -14,6 +15,7 @@
   --color-white: #f7f7f7;
   --color-gray: #808080;
   --color-black: #0e0e0e;
+  --color-fed-light: #498BCC;
   --color-fed: #212049;
   --color-treasury-light: #FFEA94;
   --color-treasury: #E8CB56;

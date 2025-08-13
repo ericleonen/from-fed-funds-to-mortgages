@@ -16,24 +16,34 @@
 
 #FedFunds {
     background-color: var(--color-fed);
+    color: var(--color-white);
 
-    .cardTitle {
-        color: var(--color-white);
+    .backgroundOval {
+        background-color: var(--color-fed-light)
     }
 }
 
 #ShortTerm {
     background-color: var(--color-treasury);
+
+    .backgroundOval {
+        background-color: var(--color-treasury-light)
+    }
 }
 
 #LongTerm {
     background-color: var(--color-treasury-dark);
+
+    .backgroundOval {
+        background-color: var(--color-treasury)
+    }
 }
 
 #FRM {
     background-color: var(--color-frm);
+    color: var(--color-white);
 
-    .cardTitle {
-        color: var(--color-white);
+    .backgroundOval {
+        background-color: var(--color-frm-light)
     }
 }

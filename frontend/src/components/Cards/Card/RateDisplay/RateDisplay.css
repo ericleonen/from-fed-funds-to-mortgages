@@ -1,0 +1,27 @@
+.rateDisplayContainer {
+    position: relative;
+    height: 100px;
+    width: 160px;
+
+    .backgroundOval {
+        height: 96px;
+        width: 116px;
+        position: absolute;
+        border-radius: 100%;
+        z-index: 1;
+        top: 50%;
+        left: calc(50% - 8px);
+        transform-origin: 50% 50%;
+        transform: translate(-50%, -50%) rotate(-16deg);
+    }
+
+    .valueText {
+        position: absolute;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-metric);
+        z-index: 2;
+        top: 50%;
+        left: calc(50% + 8px);
+        transform: translate(-50%, -50%);
+    }
+}
