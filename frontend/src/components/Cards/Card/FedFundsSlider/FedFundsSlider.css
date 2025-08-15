@@ -1,0 +1,59 @@
+#fedFundsSliderContainer {
+    --track-thickness: 16px;
+    --track-length: 256px;
+    --knob-diameter: 24px;
+    --end-label-height: 20px;
+
+    position: relative;
+    height: 100%;
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#slider {
+    position: absolute;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    transform-origin: top right;
+    transform: rotate(-90deg);
+    width: var(--track-length);
+    right: calc(var(--track-thickness) - (var(--track-thickness) - var(--knob-diameter)) / 2);
+    top: calc(50% - var(--track-length) / 2);
+}
+
+#slider::-webkit-slider-runnable-track {
+    height: var(--track-thickness);
+    background: var(--color-gray-light);
+    border-radius: 999px;
+}
+
+#slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 24px;
+    width: 24px;
+    border-radius: 999px;
+    background: var(--color-fed-light);
+    margin-top: calc((var(--track-thickness) - var(--knob-diameter)) / 2);
+}
+
+.endLabel {
+    color: var(--color-white);
+    height: var(--end-label-height);
+    line-height: var(--end-label-height);
+    position: absolute;
+    width: calc(100% - var(--knob-diameter));
+    text-align: center;
+    font-family: var(--font-primary);
+}
+
+.endLabel:nth-of-type(1) {
+    top: calc(50% - var(--track-length) / 2 - var(--end-label-height) / 2);
+}
+
+.endLabel:nth-of-type(2) {
+    bottom: calc(50% - var(--track-length) / 2 - var(--end-label-height) / 2);
+}

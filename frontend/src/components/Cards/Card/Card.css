@@ -5,7 +5,7 @@
     margin-right: 16px;
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding: 32px 16px 16px;
 }
 
 .cardTitle {
@@ -14,36 +14,55 @@
     text-align: center;
 }
 
+.cardContent {
+    display: flex;
+    flex: 1;
+}
+
+.cardInfoContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    padding: 16px;
+    justify-content: center;
+}
+
+.description {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
 #FedFunds {
     background-color: var(--color-fed);
     color: var(--color-white);
+}
 
-    .backgroundOval {
-        background-color: var(--color-fed-light)
-    }
+#FedFunds .backgroundOval {
+    background-color: var(--color-fed-light)
 }
 
 #ShortTerm {
     background-color: var(--color-treasury);
+}
 
-    .backgroundOval {
-        background-color: var(--color-treasury-light)
-    }
+#ShortTerm .backgroundOval {
+    background-color: var(--color-treasury-light)
 }
 
 #LongTerm {
     background-color: var(--color-treasury-dark);
+}
 
-    .backgroundOval {
-        background-color: var(--color-treasury)
-    }
+#LongTerm .backgroundOval {
+    background-color: var(--color-treasury)
 }
 
 #FRM {
     background-color: var(--color-frm);
     color: var(--color-white);
+}
 
-    .backgroundOval {
-        background-color: var(--color-frm-light)
-    }
+#FRM .backgroundOval {
+    background-color: var(--color-frm-light)
 }
