@@ -11,7 +11,10 @@ function Cards() {
 
     return (
         <div className="cardsContainer">
-            <CardGroup>
+            <CardGroup
+                image="federal-reserve"
+                imageTiltDegrees={2.5}
+            >
                 <Card 
                     title="Federal Funds Rate"
                     rate={Rates.FedFunds}
@@ -26,7 +29,11 @@ function Cards() {
                     />
                 </Card>
             </CardGroup>
-            <CardGroup lower>
+            <CardGroup 
+                image="treasury"
+                imageTiltDegrees={-2.5}
+                lower
+            >
                 <Card 
                     title="3-Month Treasury Yield"
                     rate={Rates.ShortTerm}
@@ -40,7 +47,10 @@ function Cards() {
                     description="The long-term lending rate, set by the market and reported by the Federal Reserve"
                 />
             </CardGroup>
-            <CardGroup>
+            <CardGroup
+                image="house"
+                imageTiltDegrees={2.5}
+            >
                 <Card
                     title="30-Year FRM Rate"
                     rate={Rates.FRM}

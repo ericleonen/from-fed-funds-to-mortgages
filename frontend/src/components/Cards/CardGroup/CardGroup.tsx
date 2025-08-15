@@ -3,10 +3,13 @@ import "./CardGroup.css";
 
 type CardGroupProps = {
     lower?: boolean
+    image: string,
+    imageTiltDegrees: number;
     children: React.ReactNode
 };
 
-const CardGroup: React.FC<CardGroupProps> = ({ lower, children }) => {
+const CardGroup: React.FC<CardGroupProps> = ({ lower, image, imageTiltDegrees, children }) => {
+    const imgSrc = `/images/${image}.png`;
 
     return (
         <div 
@@ -15,6 +18,15 @@ const CardGroup: React.FC<CardGroupProps> = ({ lower, children }) => {
                 "marginTop": lower ? "128px" : "0px"
             }}
         >
+            <div className="cardImageContainer">
+                <img 
+                    className="cardImage" 
+                    src={imgSrc}
+                    style={{
+                        "transform": `rotate(${imageTiltDegrees}deg)`
+                    }}
+                />
+            </div>
             {children}
         </div>
     );
