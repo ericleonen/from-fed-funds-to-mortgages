@@ -1,0 +1,8 @@
+.chart {
+    position: absolute;
+    height: 240px;
+    width: 256px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}

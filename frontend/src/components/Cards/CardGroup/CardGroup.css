@@ -9,6 +9,7 @@
     transform-origin: top left;
     left: 50%;
     top: 0;
+    z-index: 100;
 }
 
 .cardImage {

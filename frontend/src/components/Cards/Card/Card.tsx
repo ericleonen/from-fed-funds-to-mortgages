@@ -28,6 +28,13 @@ const Card: React.FC<CardProps> = ({ title, rate, rateValue, description, childr
                     </p>
                 </div>
             </div>
+            {
+                rate !== Rates.FedFunds && (
+                    <div className="chartContainer">
+                        {children}
+                    </div>
+                )
+            }
         </div>
     );
 };

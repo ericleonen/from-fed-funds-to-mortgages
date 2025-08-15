@@ -4,10 +4,13 @@ import Card from "./Card";
 import FedFundsSlider from "./Card/FedFundsSlider";
 import CardGroup from "./CardGroup";
 import "./Cards.css";
+import Chart from "./Card/Chart";
 
 function Cards() {
     const origFedFundsRate = 4.33;
-    const [deltaFedFundsRate, setDeltaFedFundsRate] = useState(0); 
+    const [deltaFedFundsRate, setDeltaFedFundsRate] = useState(0);
+
+    const fedFundsRate = origFedFundsRate + deltaFedFundsRate;
 
     return (
         <div className="cardsContainer">
@@ -18,13 +21,13 @@ function Cards() {
                 <Card 
                     title="Federal Funds Rate"
                     rate={Rates.FedFunds}
-                    rateValue={origFedFundsRate + deltaFedFundsRate}
+                    rateValue={fedFundsRate}
                     description="The overnight unsecured lending rate between depository institutions, set by the Federal Reserve Board of Governors"
                 >
                     <FedFundsSlider
                         min={0}
                         max={10 + Math.floor(origFedFundsRate + 1)}
-                        value={origFedFundsRate + deltaFedFundsRate}
+                        value={fedFundsRate}
                         onChange={newFedFundsRate => setDeltaFedFundsRate(newFedFundsRate - origFedFundsRate)}
                     />
                 </Card>
@@ -39,13 +42,17 @@ function Cards() {
                     rate={Rates.ShortTerm}
                     rateValue={0}
                     description="The short-term lending rate, set by the market and reported by the Federal Reserve"
-                />
+                >
+                    <Chart deltaExogRate={deltaFedFundsRate} />
+                </Card>
                 <Card
                     title="10-Year Treasury Yield"
                     rate={Rates.LongTerm}
                     rateValue={0}
                     description="The long-term lending rate, set by the market and reported by the Federal Reserve"
-                />
+                >
+                    <Chart deltaExogRate={deltaFedFundsRate} />
+                </Card>
             </CardGroup>
             <CardGroup
                 image="house"
@@ -56,7 +63,9 @@ function Cards() {
                     rate={Rates.FRM}
                     rateValue={0}
                     description="Average weekly mortgage rate, set by the market and reported by Freddie Mac"
-                />
+                >
+                    <Chart deltaExogRate={deltaFedFundsRate} />
+                </Card>
             </CardGroup>
         </div>
     )

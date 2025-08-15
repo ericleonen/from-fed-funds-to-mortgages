@@ -32,6 +32,11 @@
     margin-bottom: 16px;
 }
 
+.chartContainer {
+    position: relative;
+    height: 100px;
+}
+
 #FedFunds {
     background-color: var(--color-fed);
     color: var(--color-white);
