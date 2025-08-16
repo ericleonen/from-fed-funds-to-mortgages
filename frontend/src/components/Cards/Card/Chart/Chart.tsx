@@ -2,48 +2,107 @@ import Plot from "react-plotly.js";
 import "./Chart.css";
 
 type ChartProps = {
-    deltaExogRate: number
+    histDeltaExogRates: number[],
+    histDeltaEndogRates: number[],
+    currDeltaExogRate: number,
+    model: (x: number) => number,
+    exogRateName: string,
+    endogRateName: string
 };
 
-const Chart: React.FC<ChartProps> = ({ deltaExogRate }) => {
+const Chart: React.FC<ChartProps> = ({ histDeltaExogRates, histDeltaEndogRates, currDeltaExogRate, model, exogRateName, endogRateName }) => {
+    const minDeltaExogRate = Math.min(...histDeltaExogRates, currDeltaExogRate);
+    const maxDeltaExogRate = Math.max(...histDeltaExogRates, currDeltaExogRate);
+    const currDeltaEndogRate = model(currDeltaExogRate);
+
+    const colors = {
+        main: "#212049",
+        grid: "#ecececff",
+        line: "red",
+        scatter: "#498BCC"
+    }
 
     return (
         <Plot
             className="chart"
             data={[
                 {
-                    x: [-3, -2, -1, 0, 1, 2, 3],
-                    y: [-2.5, -1.8, -1.1, 0, 1.1, 1.9, 2.8],
+                    x: histDeltaExogRates,
+                    y: histDeltaEndogRates,
                     type: "scatter",
-                    mode: "markers"
+                    mode: "markers",
+                    hoverinfo: "skip",
+                    marker: {
+                        size: 4,
+                        color: colors.scatter
+                    }
                 },
                 {
-                    x: [-3, -2, -1, 0, 1, 2, 3],
-                    y: [-3, -2, -1, 0, 1, 2, 3],
+                    x: [minDeltaExogRate, maxDeltaExogRate],
+                    y: [model(minDeltaExogRate), model(maxDeltaExogRate)],
                     type: "scatter",
-                    mode: "lines"
+                    mode: "lines",
+                    hoverinfo: "skip",
+                    line: {
+                        color: colors.line,
+                        width: 2
+                    }
                 }
             ]}
             layout={{
-                margin: { t: 32, l: 32, r: 32, b: 32 },
+                margin: { t: 8, l: 32, r: 8, b: 32 },
                 dragmode: false,
                 showlegend: false,
+                font: { family: "Roboto Flex, sans-serif", color: colors.main, size: 11 },
+                paper_bgcolor: "rgba(0, 0, 0, 0)",
+                plot_bgcolor: "rgba(0, 0, 0, 0)",
                 xaxis: {
-                    title: { text: "Δ Exogeneous Rate" }
+                    title: { text: `Δ ${exogRateName}` },
+                    linecolor: colors.main,
+                    linewidth: 1,
+                    showgrid: true,
+                    gridcolor: colors.grid,
+                    ticks: "outside",
+                    ticklen: 2,
+                    showline: true,
+                    mirror: true,
+                    dtick: 1
                 },
                 yaxis: {
-                    title: { text: "Δ Endogeneous Rate" }
+                    title: { text: `Δ ${endogRateName}` },
+                    linecolor: colors.main,
+                    linewidth: 1,
+                    showgrid: true,
+                    gridcolor: colors.grid,
+                    ticks: "outside",
+                    ticklen: 2,
+                    showline: true,
+                    mirror: true,
+                    dtick: 1
                 },
                 shapes: [
                     {
                         type: "line",
-                        x0: deltaExogRate,
+                        x0: currDeltaExogRate,
                         y0: 0,
-                        x1: deltaExogRate,
-                        y1: deltaExogRate,
+                        x1: currDeltaExogRate,
+                        y1: currDeltaEndogRate,
                         line: {
-                            color: "red",
-                            width: 2
+                            color: colors.main,
+                            width: 1.5,
+                            dash: "dot"
+                        }
+                    },
+                    {
+                        type: "line",
+                        x0: 0,
+                        y0: currDeltaEndogRate,
+                        x1: currDeltaExogRate,
+                        y1: currDeltaEndogRate,
+                        line: {
+                            color: colors.main,
+                            width: 1.5,
+                            dash: "dot"
                         }
                     }
                 ]
