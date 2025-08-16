@@ -5,12 +5,17 @@ import FedFundsSlider from "./Card/FedFundsSlider";
 import CardGroup from "./CardGroup";
 import "./Cards.css";
 import Chart from "./Card/Chart";
+import usePlottingData from "../../hooks/usePlottingData";
 
 function Cards() {
-    const origFedFundsRate = 4.33;
+    const data = usePlottingData();
     const [deltaFedFundsRate, setDeltaFedFundsRate] = useState(0);
 
-    const fedFundsRate = origFedFundsRate + deltaFedFundsRate;
+    if (!data) {
+        return null;
+    }
+
+    const fedFundsRate = data.lastFFR.value + deltaFedFundsRate;
 
     return (
         <div className="cardsContainer">
@@ -26,9 +31,9 @@ function Cards() {
                 >
                     <FedFundsSlider
                         min={0}
-                        max={10 + Math.floor(origFedFundsRate + 1)}
+                        max={10 + Math.floor(data.lastFFR.value + 1)}
                         value={fedFundsRate}
-                        onChange={newFedFundsRate => setDeltaFedFundsRate(newFedFundsRate - origFedFundsRate)}
+                        onChange={newFedFundsRate => setDeltaFedFundsRate(newFedFundsRate - data.lastFFR.value)}
                     />
                 </Card>
             </CardGroup>
