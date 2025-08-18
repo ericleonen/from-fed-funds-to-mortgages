@@ -3,6 +3,7 @@ import Cards from "./components/Cards";
 import Footer from "./components/Footer";
 import "./App.css";
 import usePlottingData from "./hooks/usePlottingData";
+import ScreenWidthWarningModal from "./components/ScreenWidthWarningModal";
 
 const App: React.FC = () => {
     const data = usePlottingData();
@@ -19,6 +20,7 @@ const App: React.FC = () => {
                 </div>
                 <Footer />
             </div>
+            <ScreenWidthWarningModal minScreenWidth={1380} />
         </>
     );
 }
