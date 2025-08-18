@@ -9,7 +9,7 @@ type CardGroupProps = {
 };
 
 const CardGroup: React.FC<CardGroupProps> = ({ lower, image, imageTiltDegrees, children }) => {
-    const imgSrc = `/images/${image}.png`;
+    const imgSrc = `${process.env.PUBLIC_URL}/images/${image}.png`;
 
     return (
         <div 
