@@ -7,7 +7,11 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://ericleonen.github.io/from-fed-funds-to-mortgages"],
+    allow_origins=[
+        "http://localhost:3000", 
+        "https://ericleonen.github.io/from-fed-funds-to-mortgages", 
+        "https://ericleonen.github.io/from-fed-funds-to-mortgages/"
+    ],
     allow_methods=["GET"],
     allow_headers=["*"],
 )
