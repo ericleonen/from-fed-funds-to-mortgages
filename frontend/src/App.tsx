@@ -8,15 +8,18 @@ const App: React.FC = () => {
     const data = usePlottingData();
 
     return (
-        <div className="appContainer">
-            <div className="mainContainer">
-                <Header 
-                    lastUpdatedDate={data?.lastUpdatedDate}
-                />
-                <Cards data={data} />
+        <>
+            <title>From Fed Funds to Mortgages</title>
+            <div className="appContainer">
+                <div className="mainContainer">
+                    <Header 
+                        lastUpdatedDate={data?.lastUpdatedDate}
+                    />
+                    <Cards data={data} />
+                </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
+        </>
     );
 }
 

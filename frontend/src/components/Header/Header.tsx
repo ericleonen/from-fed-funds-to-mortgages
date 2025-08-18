@@ -12,7 +12,7 @@ const Header: React.FC<HeaderProps> = ({ lastUpdatedDate }) => {
             <div className="updateContainer">
                 {
                     lastUpdatedDate ? (
-                        <p className="updateText">Last updated {lastUpdatedDate}</p>
+                        <p className="updateText">Change the Federal Funds Rate and see what happens! Last updated {lastUpdatedDate}</p>
                     ): (
                         <>
                             <div className="spinner"/>
