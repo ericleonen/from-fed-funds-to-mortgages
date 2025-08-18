@@ -7,6 +7,7 @@ import os
 from dotenv import load_dotenv
 import pandas as pd
 import numpy as np
+from datetime import datetime
 
 load_dotenv()
 fred = Fred(api_key=os.getenv("FRED_API_KEY"))
@@ -41,7 +42,8 @@ def get_plotting_data() -> dict:
 
     for name, code in names_and_codes:
         series = fred.get_series(code).dropna()
-        updated_date = fred.get_series_info(code)["last_updated"]
+        print(fred.get_series_info(code)["last_updated"])
+        updated_date = datetime.strptime(fred.get_series_info(code)["last_updated"][:10], "%Y-%m-%d")
 
         last_updated_date = updated_date if last_updated_date is None else max(last_updated_date, updated_date)
 
@@ -76,7 +78,7 @@ def get_plotting_data() -> dict:
     delta_frm_list = data["ΔFRM"].to_list()
 
     return {
-        "lastUpdatedDate": last_updated_date,
+        "lastUpdatedDate": last_updated_date.strftime("%B %d, %Y").replace(" 0", " "),
         "lastFFR": last_values["FFR"],
         "lastSTR": last_values["STR"],
         "lastLTR": last_values["LTR"],
