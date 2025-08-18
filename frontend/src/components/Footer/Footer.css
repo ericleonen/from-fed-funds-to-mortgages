@@ -6,3 +6,7 @@
     height: 64px;
     padding: 16px 32px;
 }
+
+a {
+    color: var(--color-fed-light);
+}

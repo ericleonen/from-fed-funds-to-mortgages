@@ -1,18 +1,17 @@
-type LastValue = {
-    value: number,
-    date: string
-}
+type RateData = {
+    lastValue: number,
+    deltas: number[]
+};
+
+type Model = (x: number) => number;
 
 type PlottingData = {
-    lastFFR: LastValue,
-    lastSTR: LastValue,
-    lastLTR: LastValue,
-    lastFRM: LastValue,
-    deltaFFR: number[],
-    deltaSTR: number[],
-    deltaLTR: number[],
-    deltaFRM: number[]
-    coefs1: [number, number],
-    coefs2: [number, number],
-    coefs3: [number, number]
-}
+    lastUpdatedDate: string,
+    FFR: RateData,
+    STR: RateData,
+    LTR: RateData,
+    FRM: RateData,
+    model1: Model,
+    model2: Model,
+    model3: Model
+};

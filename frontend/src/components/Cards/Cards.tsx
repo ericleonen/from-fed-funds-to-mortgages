@@ -5,30 +5,39 @@ import FedFundsSlider from "./Card/FedFundsSlider";
 import CardGroup from "./CardGroup";
 import "./Cards.css";
 import Chart from "./Card/Chart";
-import usePlottingData from "../../hooks/usePlottingData";
 
-function Cards() {
-    const data = usePlottingData();
+type CardsProps = {
+    data: PlottingData | null;
+}
+
+const identity = (x: number) => x;
+
+const Cards: React.FC<CardsProps> = ({ data }) => {
+    const ready = data !== null;
     const [deltaFFR, setDeltaFFR] = useState(0);
 
-    if (!data) {
-        return null;
+    let lastFFR = 0;
+    let currFFR = 0;
+    let deltaSTR = 0;
+    let currSTR = 0;
+    let deltaLTR = 0;
+    let currLTR = 0;
+    let deltaFRM = 0;
+    let currFRM = 0;
+
+    if (ready) {
+        lastFFR = data.FFR.lastValue;
+        currFFR = lastFFR + deltaFFR;
+
+        deltaSTR = data.model1(deltaFFR);
+        currSTR = data.STR.lastValue + deltaSTR;
+
+        deltaLTR = data.model2(deltaSTR);
+        currLTR = data.LTR.lastValue + deltaLTR;
+
+        deltaFRM = data.model3(deltaLTR);
+        currFRM = data.FRM.lastValue + deltaFRM;
     }
-
-    const model1 = (x: number) => data.coefs1[0] + data.coefs1[1] * x;
-    const model2 = (x: number) => data.coefs2[0] + data.coefs2[1] * x;
-    const model3 = (x: number) => data.coefs3[0] + data.coefs3[1] * x;
-
-    const currFFR = data.lastFFR.value + deltaFFR;
-    
-    const deltaSTR = model1(deltaFFR);
-    const currSTR = data.lastSTR.value + deltaSTR;
-
-    const deltaLTR = model2(deltaSTR);
-    const currLTR = data.lastLTR.value + deltaLTR;
-
-    const deltaFRM = model3(deltaLTR);
-    const currFRM = data.lastFRM.value + deltaFRM;
 
     return (
         <div className="cardsContainer">
@@ -46,7 +55,7 @@ function Cards() {
                         min={0}
                         max={15}
                         value={currFFR}
-                        onChange={newFedFundsRate => setDeltaFFR(newFedFundsRate - data.lastFFR.value)}
+                        onChange={newFedFundsRate => setDeltaFFR(newFedFundsRate - lastFFR)}
                     />
                 </Card>
             </CardGroup>
@@ -62,10 +71,10 @@ function Cards() {
                     description="The short-term lending rate, set by the market and reported by the Federal Reserve"
                 >
                     <Chart
-                        histDeltaExogRates={data.deltaFFR}
-                        histDeltaEndogRates={data.deltaSTR}
+                        histDeltaExogRates={ready ? data.FFR.deltas : []}
+                        histDeltaEndogRates={ready ? data.STR.deltas : []}
                         currDeltaExogRate={deltaFFR}
-                        model={model1}
+                        model={ready ? data.model1 : identity}
                         exogRateName="Federal Funds Rate"
                         endogRateName="3-Month Treasury Yield"
                     />
@@ -77,10 +86,10 @@ function Cards() {
                     description="The long-term lending rate, set by the market and reported by the Federal Reserve"
                 >
                     <Chart
-                        histDeltaExogRates={data.deltaSTR}
-                        histDeltaEndogRates={data.deltaLTR}
+                        histDeltaExogRates={ready ? data.STR.deltas : []}
+                        histDeltaEndogRates={ready ? data.LTR.deltas : []}
                         currDeltaExogRate={deltaSTR}
-                        model={model2}
+                        model={ready ? data.model2 : identity}
                         exogRateName="3-Month Treasury Yield"
                         endogRateName="10-Year Treasury Yield"
                     />
@@ -97,10 +106,10 @@ function Cards() {
                     description="Average weekly mortgage rate, set by the market and reported by Freddie Mac"
                 >
                     <Chart
-                        histDeltaExogRates={data.deltaLTR}
-                        histDeltaEndogRates={data.deltaFRM}
-                        currDeltaExogRate={deltaFRM}
-                        model={model3}
+                        histDeltaExogRates={ready ? data.LTR.deltas : []}
+                        histDeltaEndogRates={ready ? data.FRM.deltas : []}
+                        currDeltaExogRate={deltaLTR}
+                        model={ready ? data.model3 : identity}
                         exogRateName="10-Year Treasury Yield"
                         endogRateName="30-Year FRM Rate"
                     />
