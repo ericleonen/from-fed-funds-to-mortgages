@@ -1,7 +1,7 @@
 #fedFundsSliderContainer {
     --track-thickness: 16px;
     --track-length: 256px;
-    --knob-diameter: 24px;
+    --knob-diameter: 28px;
     --end-label-height: 20px;
 
     position: relative;
@@ -16,28 +16,47 @@
     position: absolute;
     -webkit-appearance: none;
     appearance: none;
-    background: transparent;
+    background:
+        linear-gradient(var(--color-fed-lighter), var(--color-fed-lighter)) no-repeat,
+        linear-gradient(var(--color-gray-light), var(--color-gray-light)) no-repeat;
+    background-size:
+        calc((var(--val) - var(--min)) * 100% / (var(--max) - var(--min))) var(--track-thickness),
+        100% var(--track-thickness);
+    background-position: left center, left center;
     transform-origin: top right;
     transform: rotate(-90deg);
     width: var(--track-length);
     right: calc(var(--track-thickness) - (var(--track-thickness) - var(--knob-diameter)) / 2);
     top: calc(50% - var(--track-length) / 2);
+    border-radius: 999px;
 }
 
 #slider::-webkit-slider-runnable-track {
     height: var(--track-thickness);
-    background: var(--color-gray-light);
+    background: transparent;
     border-radius: 999px;
 }
 
 #slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    height: 24px;
-    width: 24px;
-    border-radius: 999px;
+    height: var(--knob-diameter);
+    width: calc(var(--knob-diameter) * 2/3);
+    border-radius: 2px;
     background: var(--color-fed-light);
     margin-top: calc((var(--track-thickness) - var(--knob-diameter)) / 2);
+}
+
+#slider::-moz-range-track {
+  height: var(--track-thickness);
+  background: var(--color-gray-light);
+  border-radius: 999px;
+}
+
+#slider::-moz-range-progress {
+  height: var(--track-thickness);
+  background: var(--color-fed-light);
+  border-radius: 999px 0 0 999px;
 }
 
 .endLabel {

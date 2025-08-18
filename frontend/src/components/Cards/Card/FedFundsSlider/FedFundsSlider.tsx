@@ -20,6 +20,11 @@ const FedFundsSlider: React.FC<FedFundsSliderProps> = ({ min, max, value, onChan
                 value={value}
                 onChange={(e) => onChange(parseFloat(e.target.value))}
                 id="slider"
+                style={{
+                    '--val': value,
+                    '--min': min,
+                    '--max': max,
+                } as React.CSSProperties}
             />
             <span className="endLabel">{min}%</span>
         </div>
