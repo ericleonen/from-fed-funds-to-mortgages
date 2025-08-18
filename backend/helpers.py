@@ -35,19 +35,21 @@ def get_plotting_data() -> dict:
 
     data_dict = {}
     min_date = None
+    last_updated_date = None
 
     last_values = {}
 
     for name, code in names_and_codes:
         series = fred.get_series(code).dropna()
+        updated_date = fred.get_series_info(code)["last_updated"]
+
+        last_updated_date = updated_date if last_updated_date is None else max(last_updated_date, updated_date)
+
         series_start_date = series.index.min()
         min_date = series_start_date if min_date is None else max(series_start_date, min_date)
 
         data_dict[name] = series
-        last_values[name] = {
-            "value": float(series.iloc[-1]),
-            "date": series.index.max().strftime("%m-%d-%Y")
-        }
+        last_values[name] = series.iloc[-1]
 
     data_dict = {
         name: series[series.index >= min_date].interpolate("linear").resample("YS").mean()
@@ -74,6 +76,7 @@ def get_plotting_data() -> dict:
     delta_frm_list = data["ΔFRM"].to_list()
 
     return {
+        "lastUpdatedDate": last_updated_date,
         "lastFFR": last_values["FFR"],
         "lastSTR": last_values["STR"],
         "lastLTR": last_values["LTR"],
