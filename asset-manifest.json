@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/from-fed-funds-to-mortgages/static/css/main.9596c6f0.css",
+    "main.css": "/from-fed-funds-to-mortgages/static/css/main.c802c393.css",
     "main.js": "/from-fed-funds-to-mortgages/static/js/main.bbb57882.js",
     "static/js/453.670e15c7.chunk.js": "/from-fed-funds-to-mortgages/static/js/453.670e15c7.chunk.js",
     "index.html": "/from-fed-funds-to-mortgages/index.html",
-    "main.9596c6f0.css.map": "/from-fed-funds-to-mortgages/static/css/main.9596c6f0.css.map",
+    "main.c802c393.css.map": "/from-fed-funds-to-mortgages/static/css/main.c802c393.css.map",
     "main.bbb57882.js.map": "/from-fed-funds-to-mortgages/static/js/main.bbb57882.js.map",
     "453.670e15c7.chunk.js.map": "/from-fed-funds-to-mortgages/static/js/453.670e15c7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9596c6f0.css",
+    "static/css/main.c802c393.css",
     "static/js/main.bbb57882.js"
   ]
 }
