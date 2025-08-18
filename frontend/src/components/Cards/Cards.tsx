@@ -44,7 +44,7 @@ function Cards() {
                 >
                     <FedFundsSlider
                         min={0}
-                        max={10 + Math.floor(data.lastFFR.value + 1)}
+                        max={15}
                         value={currFFR}
                         onChange={newFedFundsRate => setDeltaFFR(newFedFundsRate - data.lastFFR.value)}
                     />
