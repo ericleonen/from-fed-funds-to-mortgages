@@ -38,5 +38,4 @@ body {
   font-size: var(--font-size-default);
   color: var(--black);
   background-color: var(--color-background);
-  overflow-x: hidden;
 }
